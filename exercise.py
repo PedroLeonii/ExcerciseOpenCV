@@ -18,5 +18,11 @@ cv2.imshow("immagine bordi", edgesimg)
 imgblur = cv2.GaussianBlur(img,(11,11),0)
 cv2.imshow("immagine filtro gaussian blur",imgblur)
 
+tresholdimg = cv2.threshold(grayimg,240,255,cv2.THRESH_BINARY_INV)[1]
+cv2.imshow("immagine sogliata",tresholdimg)
+
+erodedimg = tresholdimg.copy()
+erodedimg = cv2.erode(erodedimg,None,iterations= 7)
+cv2.imshow("immagine erosa",erodedimg)
 
 cv2.waitKey(0)
