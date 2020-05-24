@@ -1,10 +1,13 @@
-import cv2,imutils
+
+import cv2 , imutils
 
 
 img = cv2.imread("tetramini.jpg")
 (h,w,d) = img.shape
 
 cv2.imshow("immagine",img)
+
+#OPERAZIONI
 
 
 #FILTRI
@@ -24,5 +27,17 @@ cv2.imshow("immagine sogliata",tresholdimg)
 erodedimg = tresholdimg.copy()
 erodedimg = cv2.erode(erodedimg,None,iterations= 7)
 cv2.imshow("immagine erosa",erodedimg)
+
+#RICONOSCIMENTO CONTORNI
+countours = cv2.findContours(tresholdimg.copy(),cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+countours = imutils.grab_contours(countours)
+
+countoursimg = img.copy();
+
+for cnt in countours:
+    cv2.drawContours(countoursimg,[cnt],-1,(0,0,0),3)
+
+cv2.putText(countoursimg, "Trovati {} oggetti".format(len(countours)), (20,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+cv2.imshow("contorni immagine", countoursimg)
 
 cv2.waitKey(0)
