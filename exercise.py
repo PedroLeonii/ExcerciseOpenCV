@@ -2,13 +2,41 @@
 import cv2 , imutils
 
 
-img = cv2.imread("tetramini.jpg")
-(h,w,d) = img.shape
 
-cv2.imshow("immagine",img)
+img1 = cv2.imread("papa.jpg")
+(h,w) = img1.shape[0:2]
+cv2.imshow("immagine corona",img1)
 
 #OPERAZIONI
+center = (w // 2, h // 2)
+method = cv2.getRotationMatrix2D(center,-180, 1.0)
 
+
+partOfImg = img1[30:180, 10:300]
+cv2.imshow("parte di immagine", partOfImg)
+
+rotatedimg = cv2.warpAffine(img1,method,(w,h))
+cv2.imshow("immagine ruotata 180 ",rotatedimg)
+
+
+rotatedimg2 = imutils.rotate_bound(img1, -95)
+cv2.imshow("immagine 1 ruotata 95 ", rotatedimg2)
+
+scala = 300.0 / w;
+newSize = (300, int(h * scala))
+
+resizedimg = cv2.resize(img1, newSize)
+cv2.imshow("immagine ridimensionata", resizedimg)
+
+cv2.rectangle(img1, (400, 200), (420, 100), (0, 0, 255), 2)
+cv2.circle(img1, (100, 130), 30, (0, 0, 255), -1)
+cv2.line(img1, (50, 300), (300, 300), (0, 0, 255), 4)
+cv2.putText(img1, "Ciao mondo", (20,20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+cv2.imshow("immagine colorata", img1)
+
+
+img = cv2.imread("tetramini.jpg")
+cv2.imshow("immagine",img)
 
 #FILTRI
 grayimg = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
