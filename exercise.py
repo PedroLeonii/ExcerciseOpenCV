@@ -28,6 +28,7 @@ newSize = (300, int(h * scala))
 resizedimg = cv2.resize(img1, newSize)
 cv2.imshow("immagine ridimensionata", resizedimg)
 
+#DISEGNO SU IMMAGINI
 cv2.rectangle(img1, (400, 200), (420, 100), (0, 0, 255), 2)
 cv2.circle(img1, (100, 130), 30, (0, 0, 255), -1)
 cv2.line(img1, (50, 300), (300, 300), (0, 0, 255), 4)
